@@ -1,4 +1,4 @@
-import { Authentication } from "../helpers/firebase";
+import { Authentication } from '../helpers/firebase';
 
 export const signUp = async (email, password) =>
   await Authentication.createUserWithEmailAndPassword(email, password);
@@ -12,7 +12,7 @@ export const signOut = async () =>
 export const isAuth = () =>
   new Promise((resolve, reject) =>
     Authentication.onAuthStateChanged(
-      user => user ? resolve(true) : resolve(false)
+      function(user) { return user ? resolve(true) : resolve(false); }
     )
   );
 
