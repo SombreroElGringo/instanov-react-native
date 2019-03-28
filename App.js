@@ -4,18 +4,14 @@ import {Constants} from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 
 export default class App extends React.Component {
-	static navigationOptions = {
-			headerVisible: false,
-	}
-
-
 	render() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.statusBar}>
 					<StatusBar
 						barStyle={"dark-content"}
-					/></View>
+					/>
+				</View>
 				<AppNavigator/>
 			</View>
 		);
