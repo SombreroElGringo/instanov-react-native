@@ -21,3 +21,6 @@ export const getCurrentUser = async () =>
 
 export const getCurrentUserToken = async () =>
   await Authentication.currentUser.getIdToken();
+
+  export const getCurrentUserID = async () =>
+  await Authentication.currentUser.uid;

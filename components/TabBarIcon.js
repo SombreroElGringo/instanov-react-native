@@ -1,17 +1,13 @@
-import React from 'react';
-import { Icon } from 'expo';
+import { MaterialIcons } from '@expo/vector-icons';
+import * as React from 'react';
 
-import Colors from '../constants/Colors';
+const TabBarIcon = name => ({ tintColor }) => (
+  <MaterialIcons
+    style={{ backgroundColor: 'transparent' }}
+    name={name}
+    color={tintColor}
+    size={24}
+  />
+);
 
-export default class TabBarIcon extends React.Component {
-  render() {
-    return (
-      <Icon.Ionicons
-        name={this.props.name}
-        size={26}
-        style={{ marginBottom: -3 }}
-        color={this.props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
-      />
-    );
-  }
-}
+export default TabBarIcon;

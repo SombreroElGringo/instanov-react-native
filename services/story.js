@@ -1,4 +1,10 @@
+import uuid from 'uuid';
+
 import { Firestore } from '../helpers/firebase';
+import { getUserInfo } from '../helpers/userDeviceInfo'
+import { getCurrentUserID } from '../services/authentication';
+import { uploadImage } from '../services/upload';
+import { reduceImageAsync } from '../helpers/shrinkImage';
 
 const COLLECTION_NAME = 'stories';
 
@@ -39,3 +45,28 @@ export const getStoriesByPagination = async ({size, start}) => {
     alert(message);
   }
 }
+
+export const createStory = async ({ text, image: localUri }) => {
+  try {
+    const { uri: reducedImage, width, height } = await reduceImageAsync(
+      localUri,
+    );
+
+    const remoteUri = await uploadImageAsync(reducedImage);
+    Firestore.collection(COLLECTION_NAME).add({
+      text,
+      uid: 123/*getCurrentUserID()*/, // TODO: edit when auth implemented
+      timestamp: Date.now(),
+      imageWidth: width,
+      imageHeight: height,
+      image: remoteUri,
+      user: getUserInfo(),
+    });
+  } catch ({ message }) {
+    alert(message);
+  }
+};
+
+const uploadImageAsync = async (uri) => await uploadImage(uri, getUploadUri(getCurrentUserID()))
+
+const getUploadUri = (uid) => `${COLLECTION_NAME}/${123/*uid*/}/${uuid.v4()}.jpg`; // TODO: edit when auth implemented
