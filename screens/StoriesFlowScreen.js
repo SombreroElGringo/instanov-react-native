@@ -39,7 +39,6 @@ export default class StoriesFlowScreen extends Component {
 
   // Call our database and ask for a subset of the user posts
   makeRemoteRequest = async lastKey => {
-    // If we are currently getting posts, then bail out..
     if (this.state.loading) {
       return;
     }
@@ -63,7 +62,6 @@ export default class StoriesFlowScreen extends Component {
     this.setState({ loading: false });
   };
 
-  // Because we want to get the most recent items, don't pass the cursor back.
   // This will make the data base pull the most recent items.
   _onRefresh = () => this.makeRemoteRequest();
 
@@ -71,7 +69,6 @@ export default class StoriesFlowScreen extends Component {
   onPressFooter = () => this.makeRemoteRequest(this.lastKnownKey);
 
   render() {
-    // Let's make everything purrty by calling this method which animates layout changes.
     LayoutAnimation.easeInEaseOut();
     return (
       <StoriesList
