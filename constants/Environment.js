@@ -13,3 +13,5 @@ export const FIREBASE_CONFIG = {
   storageBucket: FIREBASE_STORAGE_BUCKET,
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
 };
+
+export const COLLECTION_NAME = 'stories';

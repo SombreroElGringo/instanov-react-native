@@ -11,4 +11,12 @@ export const getWidth = () => Dimensions.get('window').width;
 
 export const getHeight = () => Dimensions.get('window').height;
 
-export const isSmallDevice = (width) => width < 375,
+export const isSmallDevice = (width) => width < 375;
+
+export const getUserInfo = () => {
+  return {
+    deviceId: getDeviceId(),
+    deviceName: getDeviceName(),
+    platform: getPlatform(),
+  };
+}
