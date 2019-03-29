@@ -1,12 +1,9 @@
-import uuid from 'uuid';
-
 import { Firestore } from '../helpers/firebase';
 import { getUserInfo } from '../helpers/userDeviceInfo'
 import { getCurrentUserID } from '../services/authentication';
 import { uploadImage } from '../services/upload';
 import { reduceImageAsync } from '../helpers/shrinkImage';
-
-const COLLECTION_NAME = 'stories';
+import { COLLECTION_NAME } from '../constants/Environment';
 
 export const getStoriesByPagination = async ({size, start}) => {
   let ref = Firestore.collection(COLLECTION_NAME)
@@ -67,6 +64,4 @@ export const createStory = async ({ text, image: localUri }) => {
   }
 };
 
-const uploadImageAsync = async (uri) => await uploadImage(uri, getUploadUri(getCurrentUserID()))
-
-const getUploadUri = (uid) => `${COLLECTION_NAME}/${123/*uid*/}/${uuid.v4()}.jpg`; // TODO: edit when auth implemented
+const uploadImageAsync = async (uri) => await uploadImage(uri, 123/*getCurrentUserID()*/);// TODO: edit when auth implemented

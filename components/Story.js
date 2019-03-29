@@ -68,11 +68,11 @@ const Icon = ({ name }) => (
 const IconBar = () => (
   <View style={styles.row}>
     <View style={styles.row}>
-      <Icon name="ios-heart-outline" />
-      <Icon name="ios-chatbubbles-outline" />
-      <Icon name="ios-send-outline" />
+      <Icon name="ios-heart-empty" />
+      <Icon name="ios-chatbubbles" />
+      <Icon name="ios-send" />
     </View>
-    <Icon name="ios-bookmark-outline" />
+    <Icon name="ios-bookmark" />
   </View>
 );
 

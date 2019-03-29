@@ -15,7 +15,7 @@ export default class StoriesList extends React.Component {
         ListFooterComponent={footerProps => (
           <Footer {...footerProps} onPress={onPressFooter} />
         )}
-        renderStory={this.renderStory}
+        renderItem={this.renderStory}
         {...props}
       />
     );

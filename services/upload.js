@@ -1,11 +1,25 @@
+import uuid from 'uuid';
+
 import { Storage } from '../helpers/firebase';
+import { COLLECTION_NAME } from '../constants/Environment';
 
-export const uploadImage = (uri, uploadUri) => {
+export const uploadImage = (uri, uid) => {
   return new Promise(async (res, rej) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function(e) {
+        console.log(e);
+        reject(new TypeError('Network request failed'));
+      };
+      xhr.responseType = 'blob';
+      xhr.open('GET', uri, true);
+      xhr.send(null);
+    });
 
-    const ref = Storage.ref(uploadUri);
+    const ref = Storage.ref(getUploadUri(uid));
     const unsubscribe = ref.put(blob).on(
       'state_changed',
       state => {},
@@ -21,3 +35,5 @@ export const uploadImage = (uri, uploadUri) => {
     );
   });
 }
+
+const getUploadUri = (uid) => `${COLLECTION_NAME}/${uid}/${uuid.v4()}.jpg`;

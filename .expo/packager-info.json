@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 4228,
+  "packagerPort": 19003,
+  "packagerPid": 3330,
   "expoServerNgrokUrl": "https://nv-mji.sombreroelgringo.instanov-react-native.exp.direct",
   "packagerNgrokUrl": "https://packager.nv-mji.sombreroelgringo.instanov-react-native.exp.direct",
-  "ngrokPid": 4248
+  "ngrokPid": 3344
 }
