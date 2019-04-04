@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 
 import { Storage } from '../helpers/firebase';
-import { COLLECTION_NAME } from '../constants/Environment';
+import { COLLECTION_STORIES } from '../constants/Environment';
 
 export const uploadImage = (uri, uid) => {
   return new Promise(async (res, rej) => {
@@ -36,4 +36,4 @@ export const uploadImage = (uri, uid) => {
   });
 }
 
-const getUploadUri = (uid) => `${COLLECTION_NAME}/${uid}/${uuid.v4()}.jpg`;
+const getUploadUri = (uid) => `${COLLECTION_STORIES}/${uid}/${uuid.v4()}.jpg`;

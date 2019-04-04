@@ -14,4 +14,4 @@ export const FIREBASE_CONFIG = {
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
 };
 
-export const COLLECTION_NAME = 'stories';
+export const COLLECTION_STORIES = 'stories';
