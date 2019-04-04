@@ -8,7 +8,7 @@ import store from "./redux/store";
 
 import { isAuth } from './services/authentication';
 
-export default class App extends React.Component{
+class App extends React.Component{
   state = {
     isAuth: undefined,
   }
