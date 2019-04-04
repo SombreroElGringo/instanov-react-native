@@ -34,6 +34,6 @@ export const uploadImage = (uri, uid) => {
       },
     );
   });
-}
+};
 
 const getUploadUri = (uid) => `${COLLECTION_NAME}/${uid}/${uuid.v4()}.jpg`;
