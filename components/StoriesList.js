@@ -5,16 +5,18 @@ import Story from './Story';
 import Footer from './Footer';
 
 export default class StoriesList extends React.Component {
-  renderStory = ({ item }) => <Story {...item} />;
+  renderStory = ({ item }) =>{
+  	return <Story {...item} />;
+  }
   keyExtractor = item => item.key;
   render() {
     const { onPressFooter, ...props } = this.props;
+    console.log()
     return (
       <FlatList
         keyExtractor={this.keyExtractor}
-        ListFooterComponent={footerProps => (
-          <Footer {...footerProps} onPress={onPressFooter} />
-        )}
+        onEndReached={onPressFooter}
+        onEndReachedThreshold={0}
         renderItem={this.renderStory}
         {...props}
       />

@@ -26,11 +26,14 @@ export const getStoriesByPagination = async ({size, start}) => {
         const user = post.user || {};
 
         const name = user.deviceName;
+
         const reduced = {
           key: doc.id,
+          docId: doc.id,
           name: (name || 'Anonymous').trim(),
           ...post,
         };
+
         data.push(reduced);
       }
     });
@@ -63,5 +66,9 @@ export const createStory = async ({ text, image: localUri }) => {
     alert(message);
   }
 };
+
+export const likeStory = (id,names) => {
+	Firestore.collection(COLLECTION_NAME).doc(id).update({names})
+}
 
 const uploadImageAsync = async (uri) => await uploadImage(uri, 123/*getCurrentUserID()*/);// TODO: edit when auth implemented

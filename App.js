@@ -1,7 +1,10 @@
+import React from "react";
+import {View} from "react-native";
 import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
+import StatusBar from "./components/StatusBar";
 
 import TabBarIcon from './components/TabBarIcon';
 
@@ -9,7 +12,7 @@ import StoriesFlowScreen from './screens/StoriesFlowScreen';
 import NewStoryScreen from './screens/NewStoryScreen';
 import SelectImageScreen from './screens/SelectImageScreen';
 
-const navigator = createBottomTabNavigator(
+const Navigator = createBottomTabNavigator(
   {
     Feed: {
       screen: StoriesFlowScreen,
@@ -33,17 +36,25 @@ const navigator = createBottomTabNavigator(
   },
 );
 
-const stackNavigator = createStackNavigator(
+const StackNavigator = createStackNavigator(
   {
     Main: {
-      screen: navigator,
+      screen: Navigator,
       navigationOptions: { title: 'Instanov 🔥' },
     },
     NewStory: NewStoryScreen,
   },
   {
     cardStyle: { backgroundColor: 'white' },
+
   },
 );
 
-export default stackNavigator;
+export default class App extends React.Component{
+	render(){
+		return <View style={{flex:1}}>
+			<StatusBar/>
+			<StackNavigator/>
+		</View>
+	}
+};
