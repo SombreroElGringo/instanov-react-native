@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, Button } from "react-native";
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 import { signIn } from '../services/authentication';
 
@@ -10,7 +10,7 @@ export default class SignIn extends Component {
     password: undefined,
   };
 
-  _handleLogin = async () => {
+  _handleLogin = () => {
     const { email, password } = this.state;
 
     if (!email || email === '') {
@@ -20,13 +20,16 @@ export default class SignIn extends Component {
       return alert("Password can't be null!");
     }
 
-    return signIn(email, password);
+    return signIn(email, password)
+      .then(response => response)
+      .catch(error => alert(error.message));
   }
 
 	render() {
 		return (
 			<View>
-        <Text>Instanov</Text>
+
+        <TitleStyled>Instanov</TitleStyled>
 
         <TextInput
           placeholder="Email"
@@ -42,7 +45,7 @@ export default class SignIn extends Component {
           onChangeText={(text) => this.setState({password: text})}
         />
 
-        <Button
+        <ButtonStyled
           onPress={() => this._handleLogin()}
           title="Login"
         />
@@ -51,13 +54,6 @@ export default class SignIn extends Component {
   }
 }
 
-const ContainerStyled = styled(View)`
-    width: 100%;
-    text-align: center;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #e6e6e6;
-    border-radius: 1px;
-    margin: 0 0 10px;
-    padding: 10px 0;
-`;
+const TitleStyled = styled(Text)`font-size: 40px;`;
+
+const ButtonStyled = styled(Button)`background-color: #3897f0;`;

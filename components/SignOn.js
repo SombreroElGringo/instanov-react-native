@@ -24,13 +24,17 @@ export default class SignOn extends Component {
       return alert('Please confirm your password!');
     }
 
-    return await signUp(email, password);
+    return signUp(email, password)
+      .then(response => response)
+      .catch(error => alert(error.message));
   }
 
 	render() {
 		return (
 			<View>
-        <Text>Instanov</Text>
+        <Text>
+          <TitleStyled>Instanov</TitleStyled>
+        </Text>
 
         <TextInput
           placeholder="Email"
@@ -62,3 +66,5 @@ export default class SignOn extends Component {
 		);
   }
 }
+
+const TitleStyled = styled(Text)`font-size: 40px;`;

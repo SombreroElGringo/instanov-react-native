@@ -28,11 +28,11 @@ export default class SignScreen extends Component {
 
         <View>
           <Text>
-            { isSignOn ? "Don't have an account? " : "Do you have an account? "}
+            { isSignOn ? "Do you have an account? " : "Don't have an account? " }
             <Text
               onPress={() => this._handleChangeForm()}
             >
-              { isSignOn ? "Sign up now" : "Login to your account"}
+              { isSignOn ? "Login to your account" :  "Sign up now" }
             </Text>
           </Text>
         </View>
