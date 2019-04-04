@@ -4,12 +4,12 @@ import TabBarIcon from "../components/TabBarIcon";
 import NewStoryScreen from "../screens/NewStoryScreen";
 import SelectImageScreen from "../screens/SelectImageScreen";
 
-import StoriesFlowScreen from "../screens/StoriesFlowScreen";
+import Home from "../screens/Home";
 
 const Navigator = createBottomTabNavigator(
 	{
 		Feed: {
-			screen: StoriesFlowScreen,
+			screen: Home,
 			navigationOptions: {
 				tabBarIcon: TabBarIcon('home'),
 			},
@@ -32,16 +32,13 @@ const Navigator = createBottomTabNavigator(
 
 const StackNavigator = createStackNavigator(
 	{
-		Main: {
-			screen: Navigator,
-			navigationOptions: { title: 'Instanov 🔥' },
-		},
+		Main:  Navigator,
 		NewStory: NewStoryScreen,
 	},
 	{
 		cardStyle: { backgroundColor: 'white' },
-
+		navigationOptions: { title: 'Instanov 🔥' },
 	},
 );
 
-export default StackNavigator
+export default StackNavigator;

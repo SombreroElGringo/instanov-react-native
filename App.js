@@ -1,8 +1,10 @@
 import React from "react";
 import {View} from "react-native";
+import {Provider} from "react-redux";
 import StatusBar from "./components/StatusBar";
 import StackAuth from "./components/StackAuth";
 import StackNavigator from "./components/StackNavigator";
+import store from "./redux/store";
 
 import { isAuth } from './services/authentication';
 
@@ -29,4 +31,8 @@ export default class App extends React.Component{
       }
 		</View>
 	}
-};
+}
+
+export default () => <Provider store={store}>
+	<App/>
+</Provider>

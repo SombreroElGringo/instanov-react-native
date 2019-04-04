@@ -1,0 +1,4 @@
+export const FETCH_STORIES         = "FETCH_STORIES";
+export const FETCH_STORIES_SUCCESS = "FETCH_STORIES_SUCCESS";
+export const FETCH_STORIES_FAIL    = "FETCH_STORIES_FAIL";
+export const LIKE_POST    = "LIKE_POST";
