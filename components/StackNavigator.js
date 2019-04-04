@@ -1,4 +1,3 @@
-import React from "react";
 import {createBottomTabNavigator, createStackNavigator} from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
