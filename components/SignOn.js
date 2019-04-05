@@ -6,14 +6,17 @@ import { signUp } from '../services/authentication';
 
 export default class SignOn extends Component {
 	state = {
+    username: undefined,
     email: undefined,
     password: undefined,
     confirmPassword: undefined,
   };
 
   _handleSignUp = async () => {
-    const { email, password, confirmPassword } = this.state;
-
+    const { username, email, password, confirmPassword } = this.state;
+    if (!username || username === '') {
+      return alert("Email can't be null!");
+    }
     if (!email || email === '') {
       return alert("Email can't be null!");
     }
@@ -24,7 +27,7 @@ export default class SignOn extends Component {
       return alert('Please confirm your password!');
     }
 
-    return signUp(email, password)
+    return signUp(username, email, password)
       .then(response => response)
       .catch(error => alert(error.message));
   }
@@ -33,6 +36,12 @@ export default class SignOn extends Component {
 		return (
 			<Container>
         <TitleStyled>Instanov</TitleStyled>
+
+        <TextInputStyled
+          placeholder="Username"
+          returnKeyLabel = {"next"}
+          onChangeText={(text) => this.setState({username: text})}
+        />
 
         <TextInputStyled
           placeholder="Email"

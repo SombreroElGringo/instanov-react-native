@@ -28,11 +28,11 @@ export const likePost = (id) => async (dispatch) => {
 		let ref        = await Firestore.collection("stories").doc(id);
 		let document   = await ref.get();
 		let likes      = document.data().likes || [];
-		let deviceName = getDeviceName();
-		if (likes.includes(deviceName))
-			likes = likes.filter(l => l !== deviceName);
+		let user = document.data().user;
+		if (likes.includes(user.username))
+			likes = likes.filter(l => l !== user.username);
 		else
-			likes.push(deviceName);
+			likes.push(user.username);
 		ref.update({
 			likes,
 		});

@@ -6,18 +6,27 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styled from "styled-components";
 import {connected} from "../helpers/redux";
 import {getDeviceName, getWidth} from "../helpers/userDeviceInfo";
+import {getCurrentUserDisplayName } from '../services/authentication';
 
 @connected
 export default class Post extends React.PureComponent {
+	state = { currentUsername: undefined }
+
+	async componentDidMount() {
+    this.setState({
+      currentUsername: await getCurrentUserDisplayName(),
+		})
+	}
+
 	render() {
 		const {post, likePost}                               = this.props;
 		const {image, user, text, likes = [], id, timestamp} = post;
-
+		const { currentUsername } = this.state;
 		return <View>
 			<Grid>
 				<Row>
 					<Avatar source={{uri: image}}/>
-					<Name>{user.deviceName}</Name>
+					<Name>{user.username}</Name>
 				</Row>
 				<Row>
 					<Icon name="ellipsis-v"/>
@@ -27,7 +36,7 @@ export default class Post extends React.PureComponent {
 			<Actions>
 				<Row>
 					<TouchableOpacity onPress={() => likePost(id)}>
-						<Icon name={likes.includes(getDeviceName()) ? "heart" : "heart-o"}/>
+						<Icon name={likes.includes(currentUsername) ? "heart" : "heart-o"}/>
 					</TouchableOpacity>
 					<Icon name="comment-o"/>
 					<Icon name="send-o"/>
@@ -39,7 +48,7 @@ export default class Post extends React.PureComponent {
 			{likes.length > 0 && <Likes>{likes.length} like{likes.length > 1 ? "s" : ""}</Likes>}
 			<Description>
 				<Text>
-					<Name>{user.deviceName} </Name>
+					<Name>{user.username} </Name>
 					<Text>{text}</Text>
 				</Text>
 			</Description>
