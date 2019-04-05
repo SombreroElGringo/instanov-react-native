@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import styled from 'styled-components'
 
 import { signIn } from '../services/authentication';
@@ -27,33 +27,39 @@ export default class SignIn extends Component {
 
 	render() {
 		return (
-			<View>
+			<Container>
 
         <TitleStyled>Instanov</TitleStyled>
 
-        <TextInput
+        <TextInputStyled
           placeholder="Email"
           returnKeyLabel = {"next"}
           onChangeText={(text) => this.setState({email: text})}
         />
 
-        <TextInput
+        <TextInputStyled
           placeholder="Password"
           textContentType="password"
           secureTextEntry={true}
           returnKeyLabel = {"next"}
           onChangeText={(text) => this.setState({password: text})}
         />
-
-        <ButtonStyled
+        <TouchableOpacityStyled
           onPress={() => this._handleLogin()}
-          title="Login"
-        />
-      </View>
+        >
+          <ButtonTextStyled>Login</ButtonTextStyled>
+        </TouchableOpacityStyled>
+      </Container>
 		);
   }
 }
 
-const TitleStyled = styled(Text)`font-size: 40px;`;
+const Container = styled(View)`width: 90%;text-align: center;align-self: center;background-color: #fff;border-radius: 1px;border-style: solid;border-color: #e6e6e6;border-radius: 1px;border-width: 1px;padding: 10px 0;`;
 
-const ButtonStyled = styled(Button)`background-color: #3897f0;`;
+const TitleStyled = styled(Text)`font-family: BerkshireSwash;font-size: 40px;text-align: center;margin-bottom: 40px;`;
+
+const TextInputStyled = styled(TextInput)`border-width: 1px;border-color: #e6e6e6;overflow: hidden;margin-bottom: 8px;margin-right: 40px;margin-left: 40px;padding: 9px 0 7px 8px;`;
+
+const TouchableOpacityStyled = styled(TouchableOpacity)`background: #3897f0;border-color: #3897f0;color: #fff;border-radius: 3px;border-style: solid;border-width: 1px;font-size: 14px;font-weight: 600;line-height: 26px;overflow: hidden;flex-direction: row;justify-content: center;align-items: center;height: 30px;margin: 10px 40px 8px;`;
+
+const ButtonTextStyled = styled(Text)`color: white;font-weight: bold;font-size: 14px;`;

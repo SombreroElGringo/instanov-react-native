@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import styled from 'styled-components'
 
 import SignIn from '../components/SignIn';
 import SignOn from '../components/SignOn';
@@ -17,7 +18,7 @@ export default class SignScreen extends Component {
   render() {
     const { isSignOn } = this.state;
     return (
-      <View style={styles.container}>
+      <Layout>
         {
           isSignOn ? (
             <SignOn />
@@ -26,32 +27,24 @@ export default class SignScreen extends Component {
           )
         }
 
-        <View>
+        <Container>
           <Text>
             { isSignOn ? "Do you have an account? " : "Don't have an account? " }
-            <Text
+            <BlueTextStyled
               onPress={() => this._handleChangeForm()}
             >
               { isSignOn ? "Login to your account" :  "Sign up now" }
-            </Text>
+            </BlueTextStyled>
           </Text>
-        </View>
+        </Container>
 
-      </View>
+      </Layout>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    padding: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
+const Layout = styled(View)`flex: 1;justify-content: center;`;
+
+const Container = styled(View)`width: 90%;text-align: center;align-self: center;background-color: #fff;border-radius: 1px;border-style: solid;border-color: #e6e6e6;border-radius: 1px;border-width: 1px;padding: 10px 10px;margin-top: 20px;`;
+
+const BlueTextStyled = styled(Text)`color: #3897f0;font-weight: bold;`;
