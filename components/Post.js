@@ -9,7 +9,7 @@ import {getWidth} from "../helpers/userDeviceInfo";
 import {getCurrentUserDisplayName} from "../services/authentication";
 
 @connected
-export default class Post extends React.PureComponent {
+export default class Post extends React.Component {
 	state = {currentUsername: undefined};
 
 	async componentDidMount() {
@@ -23,7 +23,6 @@ export default class Post extends React.PureComponent {
 		const {image, user, text, likes = [], id, timestamp} = post;
 		const {currentUsername}                              = this.state;
 		if (!currentUsername) return null;
-
 		return <View>
 			<Grid>
 				<Row>

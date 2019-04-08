@@ -24,7 +24,7 @@ export const fetchPosts = () => async (dispatch) => {
 
 export const likePost = (id) => async (dispatch) => {
 	try {
-		dispatch({type: LIKE_POST});
+		dispatch({type: LIKE_POST, payload: {id, username: await getCurrentUserDisplayName()}});
 		let ref        = await Firestore.collection("stories").doc(id);
 		let document   = await ref.get();
 		let likes      = document.data().likes || [];
