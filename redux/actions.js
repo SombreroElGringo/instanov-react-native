@@ -1,5 +1,5 @@
 import {Firestore} from "../helpers/firebase";
-import {getDeviceName} from "../helpers/userDeviceInfo";
+import {getCurrentUserDisplayName} from "../services/authentication";
 import {FETCH_STORIES, FETCH_STORIES_FAIL, FETCH_STORIES_SUCCESS, LIKE_POST} from "./constants";
 
 export const fetchPosts = () => async (dispatch) => {
@@ -28,11 +28,11 @@ export const likePost = (id) => async (dispatch) => {
 		let ref        = await Firestore.collection("stories").doc(id);
 		let document   = await ref.get();
 		let likes      = document.data().likes || [];
-		let user = document.data().user;
-		if (likes.includes(user.username))
-			likes = likes.filter(l => l !== user.username);
+		const username = await getCurrentUserDisplayName();
+		if (likes.includes(username))
+			likes = likes.filter(l => l !== username);
 		else
-			likes.push(user.username);
+			likes.push(username);
 		ref.update({
 			likes,
 		});
