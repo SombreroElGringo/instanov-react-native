@@ -11,7 +11,7 @@ import {isAuth, signOut} from "../services/authentication";
 
 const Navigator = createBottomTabNavigator(
 	{
-		Feed: {
+		Home: {
 			screen: Home,
 			navigationOptions: {
 				tabBarIcon: TabBarIcon("home"),

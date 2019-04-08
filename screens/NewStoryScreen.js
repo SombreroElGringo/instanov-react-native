@@ -1,9 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-import { Image, TextInput, View } from 'react-native';
-import HeaderButtons from 'react-navigation-header-buttons';
+import {Ionicons} from "@expo/vector-icons";
+import React from "react";
+import {Image, TextInput, View} from "react-native";
+import HeaderButtons from "react-navigation-header-buttons";
 
-import { createStory } from '../services/story';
+import {createStory} from "../services/story";
 
 export default class NewStoryScreen extends React.Component<Props> {
   static navigationOptions = ({ navigation }) => ({
@@ -16,7 +16,7 @@ export default class NewStoryScreen extends React.Component<Props> {
             const text = navigation.getParam('text');
             const image = navigation.getParam('image');
             if (text && image) {
-              navigation.goBack();
+	            navigation.navigate("Home");
               createStory({ text: text.trim(), image });
             } else {
               alert('Need valid description');
