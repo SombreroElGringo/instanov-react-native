@@ -1,6 +1,5 @@
 import React from "react";
-import {View, StatusBar as SB} from "react-native";
-import {Constants} from "expo";
+import {StatusBar as SB, View} from "react-native";
 import styled from "styled-components";
 
 export default class StatusBar extends React.Component {
@@ -13,5 +12,4 @@ export default class StatusBar extends React.Component {
 
 const Wrapper = styled(View)`
 	background-color: whitesmoke;
-	height: ${Constants.statusBarHeight}px;
 `;
