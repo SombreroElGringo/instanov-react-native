@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import React, {Component} from 'react';
+import {Text, View} from 'react-native';
 import styled from 'styled-components'
 
 import SignIn from '../components/SignIn';
@@ -13,7 +13,7 @@ export default class SignScreen extends Component {
   _handleChangeForm = () => {
     const { isSignOn } = this.state;
     this.setState({isSignOn: !isSignOn})
-  }
+  };
 
   render() {
     const { isSignOn } = this.state;
@@ -21,9 +21,9 @@ export default class SignScreen extends Component {
       <Layout>
         {
           isSignOn ? (
-            <SignOn />
+              <SignOn navigation={this.props.navigation}/>
           ) : (
-            <SignIn />
+              <SignIn navigation={this.props.navigation}/>
           )
         }
 

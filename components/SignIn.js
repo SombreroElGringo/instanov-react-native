@@ -1,57 +1,57 @@
-import React, { Component } from "react";
-import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
+import React, {Component} from "react";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import styled from 'styled-components'
 
-import { signIn } from '../services/authentication';
+import {signIn} from '../services/authentication';
 
 export default class SignIn extends Component {
-	state = {
-    email: undefined,
-    password: undefined,
-  };
+    state = {
+        email: undefined,
+        password: undefined,
+    };
 
-  _handleLogin = () => {
-    const { email, password } = this.state;
+    _handleLogin = () => {
+        const {email, password} = this.state;
 
-    if (!email || email === '') {
-      return alert("Email can't be null!");
+        if (!email || email === '') {
+            return alert("Email can't be null!");
+        }
+        if (!password || password === '') {
+            return alert("Password can't be null!");
+        }
+
+        return signIn(email, password)
+            .then(response => this.props.navigation.navigate('Protected'))
+            .catch(error => alert(error.message));
+    };
+
+    render() {
+        return (
+            <Container>
+
+                <TitleStyled>Instanov</TitleStyled>
+
+                <TextInputStyled
+                    placeholder="Email"
+                    returnKeyLabel={"next"}
+                    onChangeText={(text) => this.setState({email: text})}
+                />
+
+                <TextInputStyled
+                    placeholder="Password"
+                    textContentType="password"
+                    secureTextEntry={true}
+                    returnKeyLabel={"next"}
+                    onChangeText={(text) => this.setState({password: text})}
+                />
+                <TouchableOpacityStyled
+                    onPress={() => this._handleLogin()}
+                >
+                    <ButtonTextStyled>Login</ButtonTextStyled>
+                </TouchableOpacityStyled>
+            </Container>
+        );
     }
-    if (!password || password === '') {
-      return alert("Password can't be null!");
-    }
-
-    return signIn(email, password)
-      .then(response => response)
-      .catch(error => alert(error.message));
-  }
-
-	render() {
-		return (
-			<Container>
-
-        <TitleStyled>Instanov</TitleStyled>
-
-        <TextInputStyled
-          placeholder="Email"
-          returnKeyLabel = {"next"}
-          onChangeText={(text) => this.setState({email: text})}
-        />
-
-        <TextInputStyled
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry={true}
-          returnKeyLabel = {"next"}
-          onChangeText={(text) => this.setState({password: text})}
-        />
-        <TouchableOpacityStyled
-          onPress={() => this._handleLogin()}
-        >
-          <ButtonTextStyled>Login</ButtonTextStyled>
-        </TouchableOpacityStyled>
-      </Container>
-		);
-  }
 }
 
 const Container = styled(View)`width: 90%;text-align: center;align-self: center;background-color: #fff;border-radius: 1px;border-style: solid;border-color: #e6e6e6;border-radius: 1px;border-width: 1px;padding: 10px 0;`;

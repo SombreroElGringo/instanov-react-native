@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
+import React, {Component} from "react";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import styled from 'styled-components'
 
-import { signUp } from '../services/authentication';
+import {signUp} from '../services/authentication';
 
 export default class SignOn extends Component {
 	state = {
@@ -28,9 +28,9 @@ export default class SignOn extends Component {
     }
 
     return signUp(username, email, password)
-      .then(response => response)
+        .then(response => this.props.navigation.navigate('Protected'))
       .catch(error => alert(error.message));
-  }
+  };
 
 	render() {
 		return (

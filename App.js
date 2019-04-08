@@ -1,56 +1,46 @@
 import React from "react";
 import {View} from "react-native";
 import {Provider} from "react-redux";
-import { Font } from 'expo';
+import {Font} from 'expo';
 import StatusBar from "./components/StatusBar";
-import StackAuth from "./components/StackAuth";
 import StackNavigator from "./components/StackNavigator";
 import store from "./redux/store";
 
-import { isAuth } from './services/authentication';
+class App extends React.Component {
+    state = {
+        fontLoaded: false,
+    };
 
-class App extends React.Component{
-  state = {
-    isAuth: undefined,
-    fontLoaded: false,
-  }
+    async componentDidMount() {
 
-   async componentDidMount() {
-    this.setState({
-      isAuth: await isAuth(),
-    })
 
-    await this._loadAssetsAsync();
-  }
-
-  async _loadAssetsAsync(){
-    try {
-      await Font.loadAsync({
-        'BerkshireSwash': require('./assets/fonts/BerkshireSwash-Regular.ttf'),
-      });
-      this.setState({fontLoaded: true})
+        await this._loadAssetsAsync();
     }
-    catch(e) {
-      Log.error(e);
-    }
-  }
 
-	render(){
-    const { isAuth, fontLoaded } = this.state;
-		return <View style={{flex:1}}>
-			<StatusBar/>
-      { !fontLoaded
-        ? null :
-        isAuth === undefined
-          ? null
-          : isAuth === false
-            ? <StackAuth/>
-            : <StackNavigator/>
-      }
-		</View>
-	}
+    async _loadAssetsAsync() {
+        try {
+            await Font.loadAsync({
+                'BerkshireSwash': require('./assets/fonts/BerkshireSwash-Regular.ttf'),
+            });
+            this.setState({fontLoaded: true})
+        } catch (e) {
+            Log.error(e);
+        }
+    }
+
+    render() {
+        const {fontLoaded} = this.state;
+
+        if (!fontLoaded === undefined)
+            return null;
+
+        return <View style={{flex: 1}}>
+            <StatusBar/>
+            <StackNavigator/>
+        </View>
+    }
 }
 
 export default () => <Provider store={store}>
-	<App/>
+    <App/>
 </Provider>
