@@ -4,29 +4,22 @@ import React from "react";
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styled from "styled-components";
+import {Authentication} from "../helpers/firebase";
 import {connected} from "../helpers/redux";
 import {getWidth} from "../helpers/userDeviceInfo";
-import {getCurrentUserDisplayName} from "../services/authentication";
 
 @connected
-export default class Post extends React.Component {
-	state = {currentUsername: undefined};
-
-	async componentDidMount() {
-		this.setState({
-			currentUsername: await getCurrentUserDisplayName(),
-		});
-	}
-
+export default class Post extends React.PureComponent {
 	render() {
 		const {post, likePost}                               = this.props;
 		const {image, user, text, likes = [], id, timestamp} = post;
-		const {currentUsername}                              = this.state;
+		const currentUsername                                = Authentication.currentUser.displayName;
 		if (!currentUsername) return null;
+
 		return <View>
 			<Grid>
 				<Row>
-					<Avatar source={{uri: image}}/>
+					<Avatar source={{uri: user.photoURL || image}}/>
 					<Name>{user.username}</Name>
 				</Row>
 				<Row>
