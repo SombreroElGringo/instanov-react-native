@@ -1,11 +1,13 @@
 import React from "react";
+import {TouchableOpacity} from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import {createBottomTabNavigator, createNavigationContainer, createStackNavigator, createSwitchNavigator} from "react-navigation";
 import TabBarIcon from "../components/TabBarIcon";
 import Home from "../screens/Home";
 import NewStoryScreen from "../screens/NewStoryScreen";
 import SelectImageScreen from "../screens/SelectImageScreen";
 import SignScreen from "../screens/SignScreen";
-import {isAuth} from "../services/authentication";
+import {isAuth, signOut} from "../services/authentication";
 
 const Navigator = createBottomTabNavigator(
 	{
@@ -38,9 +40,12 @@ const StackNavigator = createStackNavigator(
 	},
 	{
 		cardStyle: {backgroundColor: "white"},
-		navigationOptions: {
+		navigationOptions: ({navigation}) => ({
 			title: "Instanov 🔥",
-		},
+			headerRight: <TouchableOpacity onPress={() => {
+				signOut().finally(() => navigation.navigate("Login"));
+			}}><FontAwesome style={{padding: 5}} size={20} name="sign-out"/></TouchableOpacity>,
+		}),
 	},
 );
 

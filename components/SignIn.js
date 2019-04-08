@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Text, TextInput, TouchableOpacity, View} from "react-native";
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import {signIn} from '../services/authentication';
+import {signIn} from "../services/authentication";
 
 export default class SignIn extends Component {
     state = {
@@ -32,17 +32,19 @@ export default class SignIn extends Component {
                 <TitleStyled>Instanov</TitleStyled>
 
                 <TextInputStyled
-                    placeholder="Email"
-                    returnKeyLabel={"next"}
-                    onChangeText={(text) => this.setState({email: text})}
+	                placeholder="Email"
+	                returnKeyLabel={"next"}
+	                autoCapitalize="none"
+	                onChangeText={(text) => this.setState({email: text})}
                 />
 
                 <TextInputStyled
-                    placeholder="Password"
-                    textContentType="password"
-                    secureTextEntry={true}
-                    returnKeyLabel={"next"}
-                    onChangeText={(text) => this.setState({password: text})}
+	                placeholder="Password"
+	                textContentType="password"
+	                secureTextEntry={true}
+	                autoCapitalize="none"
+	                returnKeyLabel={"next"}
+	                onChangeText={(text) => this.setState({password: text})}
                 />
                 <TouchableOpacityStyled
                     onPress={() => this._handleLogin()}

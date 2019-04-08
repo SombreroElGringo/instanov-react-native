@@ -16,7 +16,7 @@ export default class Home extends Component {
 		return (
 			<FlatList
 				keyExtractor={e => e.id}
-				renderItem={({item}) => <Post post={item} />}
+				renderItem={({item}) => <Post post={item}/>}
 				data={posts}
 				refreshControl={<RefreshControl refreshing={loading} onRefresh={fetchPosts}/>}
 			/>

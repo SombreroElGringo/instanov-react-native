@@ -1,79 +1,83 @@
 import React, {Component} from "react";
 import {Text, TextInput, TouchableOpacity, View} from "react-native";
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import {signUp} from '../services/authentication';
+import {signUp} from "../services/authentication";
 
 export default class SignOn extends Component {
 	state = {
-    username: undefined,
-    email: undefined,
-    password: undefined,
-    confirmPassword: undefined,
-  };
+		username: undefined,
+		email: undefined,
+		password: undefined,
+		confirmPassword: undefined,
+	};
 
-  _handleSignUp = async () => {
-    const { username, email, password, confirmPassword } = this.state;
-    if (!username || username === '') {
-      return alert("Email can't be null!");
-    }
-    if (!email || email === '') {
-      return alert("Email can't be null!");
-    }
-    if (!password || password === '') {
-      return alert("Password can't be null!");
-    }
-    if (password !== confirmPassword) {
-      return alert('Please confirm your password!');
-    }
+	_handleSignUp = async () => {
+		const {username, email, password, confirmPassword} = this.state;
+		if (!username || username === "") {
+			return alert("Email can't be null!");
+		}
+		if (!email || email === "") {
+			return alert("Email can't be null!");
+		}
+		if (!password || password === "") {
+			return alert("Password can't be null!");
+		}
+		if (password !== confirmPassword) {
+			return alert("Please confirm your password!");
+		}
 
-    return signUp(username, email, password)
-        .then(response => this.props.navigation.navigate('Protected'))
-      .catch(error => alert(error.message));
-  };
+		return signUp(username, email, password)
+			.then(response => this.props.navigation.navigate("Protected"))
+			.catch(error => alert(error.message));
+	};
 
 	render() {
 		return (
 			<Container>
-        <TitleStyled>Instanov</TitleStyled>
+				<TitleStyled>Instanov</TitleStyled>
 
-        <TextInputStyled
-          placeholder="Username"
-          returnKeyLabel = {"next"}
-          onChangeText={(text) => this.setState({username: text})}
-        />
+				<TextInputStyled
+					placeholder="Username"
+					returnKeyLabel={"next"}
+					autoCapitalize="none"
+					onChangeText={(text) => this.setState({username: text})}
+				/>
 
-        <TextInputStyled
-          placeholder="Email"
-          returnKeyLabel = {"next"}
-          onChangeText={(text) => this.setState({email: text})}
-        />
+				<TextInputStyled
+					placeholder="Email"
+					returnKeyLabel={"next"}
+					autoCapitalize="none"
+					onChangeText={(text) => this.setState({email: text})}
+				/>
 
-        <TextInputStyled
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry={true}
-          returnKeyLabel = {"next"}
-          onChangeText={(text) => this.setState({password: text})}
-        />
+				<TextInputStyled
+					placeholder="Password"
+					textContentType="password"
+					secureTextEntry={true}
+					returnKeyLabel={"next"}
+					autoCapitalize="none"
+					onChangeText={(text) => this.setState({password: text})}
+				/>
 
-        <TextInputStyled
-          placeholder="Confirm password"
-          textContentType="password"
-          secureTextEntry={true}
-          returnKeyLabel = {"next"}
-          onChangeText={(text) => this.setState({confirmPassword: text})}
-        />
+				<TextInputStyled
+					placeholder="Confirm password"
+					textContentType="password"
+					secureTextEntry={true}
+					returnKeyLabel={"next"}
+					autoCapitalize="none"
+					onChangeText={(text) => this.setState({confirmPassword: text})}
+				/>
 
-        <TouchableOpacityStyled
-          onPress={() => this._handleSignUp()}
-          title="Sign up"
-        >
-          <ButtonTextStyled>Sign up</ButtonTextStyled>
-        </TouchableOpacityStyled>
-      </Container>
+				<TouchableOpacityStyled
+					onPress={() => this._handleSignUp()}
+					title="Sign up"
+				>
+					<ButtonTextStyled>Sign up</ButtonTextStyled>
+				</TouchableOpacityStyled>
+			</Container>
 		);
-  }
+	}
 }
 
 const Container = styled(View)`width: 90%;text-align: center;align-self: center;background-color: #fff;border-radius: 1px;border-style: solid;border-color: #e6e6e6;border-radius: 1px;border-width: 1px;padding: 10px 0;`;
