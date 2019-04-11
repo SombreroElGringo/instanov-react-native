@@ -19,7 +19,7 @@ export default class Post extends React.PureComponent {
 		return <View>
 			<Grid>
 				<Row>
-					<Avatar source={{uri: user.photoURL || image}}/>
+					<Avatar source={{uri: user.avatarUrl || image}}/>
 					<Name>{user.username}</Name>
 				</Row>
 				<Row>

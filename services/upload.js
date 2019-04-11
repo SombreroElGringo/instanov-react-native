@@ -1,9 +1,10 @@
 import uuid from 'uuid';
 
 import { Storage } from '../helpers/firebase';
-import { COLLECTION_STORIES } from '../constants/Environment';
+import { COLLECTION_USERS } from '../constants/Environment';
+import { getCurrentUser } from './authentication';
 
-export const uploadImage = (uri, uid) => {
+export const uploadImage = (uri, uid, collectionName) => {
   return new Promise(async (res, rej) => {
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -19,7 +20,12 @@ export const uploadImage = (uri, uid) => {
       xhr.send(null);
     });
 
-    const ref = Storage.ref(getUploadUri(uid));
+    const user = await getCurrentUser();
+    if (COLLECTION_USERS === collectionName && user.photoURL) {
+      await Storage.refFromURL(user.photoURL).delete();
+    }
+
+    const ref = Storage.ref(getUploadUri(collectionName, uid));
     const unsubscribe = ref.put(blob).on(
       'state_changed',
       state => {},
@@ -36,4 +42,4 @@ export const uploadImage = (uri, uid) => {
   });
 };
 
-const getUploadUri = (uid) => `${COLLECTION_STORIES}/${uid}/${uuid.v4()}.jpg`;
+const getUploadUri = (collectionName, uid) => `${collectionName}/${uid}/${uuid.v4()}.jpg`;

@@ -15,3 +15,4 @@ export const FIREBASE_CONFIG = {
 };
 
 export const COLLECTION_STORIES = 'stories';
+export const COLLECTION_USERS = 'users';

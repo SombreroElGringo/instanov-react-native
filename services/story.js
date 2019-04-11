@@ -1,6 +1,6 @@
 import { Firestore } from '../helpers/firebase';
 import { getUserDeviceInfo } from '../helpers/userDeviceInfo';
-import { getCurrentUserID, getCurrentUserDisplayName } from '../services/authentication';
+import { getCurrentUser } from '../services/authentication';
 import { uploadImage } from '../services/upload';
 import { reduceImageAsync } from '../helpers/shrinkImage';
 import { COLLECTION_STORIES } from '../constants/Environment';
@@ -12,6 +12,7 @@ export const createStory = async ({ text, image: localUri }) => {
     );
 
     const remoteUri = await uploadImageAsync(reducedImage);
+    const user = await getCurrentUser();
     Firestore.collection(COLLECTION_STORIES).add({
       text,
       timestamp: Date.now(),
@@ -19,8 +20,9 @@ export const createStory = async ({ text, image: localUri }) => {
       imageHeight: height,
       image: remoteUri,
       user: {
-        uid: await getCurrentUserID(),
-        username: await getCurrentUserDisplayName(),
+        uid: user.uid,
+        username: user.displayName,
+        avatarUrl: user.photoURL,
       },
       deviceInfo: getUserDeviceInfo(),
     });
@@ -33,4 +35,4 @@ export const likeStory = (id,names) => {
 	Firestore.collection(COLLECTION_STORIES).doc(id).update({names})
 }
 
-const uploadImageAsync = async (uri) => await uploadImage(uri, await getCurrentUserID());
+const uploadImageAsync = async (uri) => await uploadImage(uri, await getCurrentUserID(), COLLECTION_STORIES);

@@ -12,6 +12,8 @@ import Home from "../screens/Home";
 import NewStoryScreen from "../screens/NewStoryScreen";
 import Profile from "../screens/Profile";
 import SelectImageScreen from "../screens/SelectImageScreen";
+import SelectAvatarScreen from "../screens/SelectAvatarScreen";
+import NewAvatarScreen from "../screens/NewAvatarScreen";
 import SignScreen from "../screens/SignScreen";
 import {isAuth, signOut} from "../services/authentication";
 
@@ -50,6 +52,8 @@ const StackNavigator = createStackNavigator(
 	{
 		Main: Navigator,
 		NewStory: NewStoryScreen,
+		SelectAvatar: SelectAvatarScreen,
+		NewAvatar: NewAvatarScreen,
 	},
 	{
 		cardStyle: {backgroundColor: "white"},
