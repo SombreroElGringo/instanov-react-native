@@ -4,6 +4,7 @@ import { getCurrentUser } from '../services/authentication';
 import { uploadImage } from '../services/upload';
 import { reduceImageAsync } from '../helpers/shrinkImage';
 import { COLLECTION_STORIES } from '../constants/Environment';
+import {getCurrentUserID} from "./authentication";
 
 export const createStory = async ({ text, image: localUri }) => {
   try {
