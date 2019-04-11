@@ -15,8 +15,10 @@
     "expo": "^32.0.0",
     "firebase": "^5.9.1",
     "immutable": "^4.0.0-rc.12",
+    "moment": "latest",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-lightbox": "^0.8.0",
     "react-native-vector-icons": "latest",
     "react-navigation": "2.6.0",
     "react-navigation-header-buttons": "^2.2.0",
@@ -24,8 +26,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.2.0",
-    "uuid": "^3.3.2",
-    "moment": "latest"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

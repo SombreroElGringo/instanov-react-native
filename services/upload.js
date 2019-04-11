@@ -2,7 +2,7 @@ import uuid from 'uuid';
 
 import { Storage } from '../helpers/firebase';
 import { COLLECTION_USERS } from '../constants/Environment';
-import { getCurrentUser } from './authentication';
+import { getCurrentUser } from '../helpers/firebase';
 
 export const uploadImage = (uri, uid, collectionName) => {
   return new Promise(async (res, rej) => {

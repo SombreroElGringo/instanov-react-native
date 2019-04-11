@@ -39,7 +39,7 @@ const Navigator = createBottomTabNavigator(
 		},
 	},
 	{
-		initialRouteName: "Profile",
+		initialRouteName: "Home",
 		tabBarOptions: {
 			showLabel: false,
 			activeTintColor: "black",

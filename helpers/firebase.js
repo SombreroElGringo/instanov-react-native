@@ -11,3 +11,6 @@ export const Authentication = firebase.auth();
 export const Firestore = firebase.firestore();
 
 export const Storage = firebase.storage();
+
+export const getCurrentUser = async () =>
+	await Authentication.currentUser;

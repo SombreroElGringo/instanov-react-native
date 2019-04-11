@@ -2,6 +2,7 @@ import moment from "moment";
 import "moment/locale/fr";
 import React from "react";
 import {Image, Text, TouchableOpacity, View} from "react-native";
+import LightBox from 'react-native-lightbox';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styled from "styled-components";
 import {Authentication} from "../helpers/firebase";
@@ -26,7 +27,9 @@ export default class Post extends React.PureComponent {
 					<Icon name="ellipsis-v"/>
 				</Row>
 			</Grid>
-			<Picture source={{uri: image}}/>
+			<LightBox>
+				<Picture source={{uri: image}}/>
+			</LightBox>
 			<Actions>
 				<Row>
 					<TouchableOpacity onPress={() => likePost(id)}>
