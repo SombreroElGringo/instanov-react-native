@@ -1,22 +1,18 @@
 import React from "react";
 import {TouchableOpacity} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import {
-	createBottomTabNavigator,
-	createNavigationContainer,
-	createStackNavigator,
-	createSwitchNavigator,
-} from "react-navigation";
+import {createBottomTabNavigator, createNavigationContainer, createStackNavigator, createSwitchNavigator} from "react-navigation";
 import TabBarIcon from "../components/TabBarIcon";
+import CommentsScreen from "../screens/CommentsScreen";
 import Home from "../screens/Home";
+import NewAvatarScreen from "../screens/NewAvatarScreen";
 import NewStoryScreen from "../screens/NewStoryScreen";
 import Profile from "../screens/Profile";
-import SelectImageScreen from "../screens/SelectImageScreen";
 import SelectAvatarScreen from "../screens/SelectAvatarScreen";
-import NewAvatarScreen from "../screens/NewAvatarScreen";
+import SelectImageScreen from "../screens/SelectImageScreen";
 import SignScreen from "../screens/SignScreen";
-import {isAuth, signOut} from "../services/authentication";
 import StoryScreen from "../screens/StoryScreen";
+import {isAuth, signOut} from "../services/authentication";
 
 const Navigator = createBottomTabNavigator(
 	{
@@ -56,6 +52,7 @@ const StackNavigator = createStackNavigator(
 		SelectAvatar: SelectAvatarScreen,
 		NewAvatar: NewAvatarScreen,
 		Story: StoryScreen,
+		Comments: CommentsScreen
 	},
 	{
 		cardStyle: {backgroundColor: "white"},

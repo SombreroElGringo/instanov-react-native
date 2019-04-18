@@ -9,11 +9,11 @@ export default class Comments extends React.Component {
 	state = {edit: false};
 
 	render() {
-		const {comments = []} = this.props;
+		const {comments = [], onPress} = this.props;
 		const {edit}          = this.state;
 
 		return <CommentsWrapper behavior={"position"}>
-			{comments.length > 0 && <TouchableOpacity onPress={this.openComments}>
+			{comments.length > 0 && <TouchableOpacity onPress={onPress}>
 				<CommentsMessage>Voir les {comments.length} commentaires</CommentsMessage>
 			</TouchableOpacity>}
 			<Row style={{marginBottom: 5}}>

@@ -56,7 +56,11 @@ export default class Post extends React.PureComponent {
 					<Text>{text}</Text>
 				</Text>
 			</Description>
-			<Comments comments={comments} postId={id} sendComment={sendComment}/>
+			<Comments comments={comments}
+			          postId={id}
+			          sendComment={sendComment}
+			          onPress={() => navigation ? navigation.push("Comments", {comments}) : null}
+			/>
 			<Date>{moment().to(timestamp)}</Date>
 		</KeyboardAvoidingView>;
 	}
