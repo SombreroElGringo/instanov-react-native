@@ -1,7 +1,7 @@
 import moment from "moment";
 import "moment/locale/fr";
 import React from "react";
-import {Image, Text, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
+import {Image, Text, TouchableOpacity, TouchableWithoutFeedback, View, Share} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styled from "styled-components";
 import {Authentication} from "../helpers/firebase";
@@ -31,24 +31,19 @@ export default class Post extends React.PureComponent {
 			<TouchableWithoutFeedback onPress={() => this.setState({visible: true})}>
 				<Picture source={{uri: image}}/>
 			</TouchableWithoutFeedback>
-			<ImageView isVisible={this.state.visible}
-			           animationType="fade"
-			           onClose={() => this.setState({visible: false})}
-			           images={[
-				           {
-					           source: {uri: image},
-					           width: imageWidth,
-					           height: imageHeight,
-				           },
-			           ]}
-			/>
 			<Actions>
 				<Row>
 					<TouchableOpacity onPress={() => likePost(id)}>
 						<Icon name={likes.includes(currentUsername) ? "heart" : "heart-o"}/>
 					</TouchableOpacity>
 					<Icon name="comment-o"/>
-					<Icon name="send-o"/>
+					<TouchableOpacity onPress={() => Share.share({
+						message: `Hey ! Check that awesome post ! ${image}`,
+						title: text,
+						url: image
+					})}>
+						<Icon name="send-o"/>
+					</TouchableOpacity>
 				</Row>
 				<Row>
 					<Icon name="bookmark-o"/>
