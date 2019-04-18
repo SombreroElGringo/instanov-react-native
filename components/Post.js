@@ -7,14 +7,13 @@ import styled from "styled-components";
 import {Authentication} from "../helpers/firebase";
 import {connected} from "../helpers/redux";
 import {getWidth} from "../helpers/userDeviceInfo";
-import ImageView from "react-native-image-view";
 
 @connected
 export default class Post extends React.PureComponent {
 	state={visible: false,};
 	render() {
-		const {post, likePost}                                                        = this.props;
-		const {image, user, text, likes = [], id, timestamp, imageHeight, imageWidth} = post;
+		const { post, likePost }                                                        = this.props;
+		const { image, user, text, likes = [], id, timestamp } = post;
 		const currentUsername                                                         = Authentication.currentUser.displayName;
 		if (!currentUsername) return null;
 
