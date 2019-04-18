@@ -10,13 +10,11 @@ import {getWidth} from "../helpers/userDeviceInfo";
 
 @connected
 export default class Post extends React.PureComponent {
-	state={visible: false,};
 	render() {
-		const { post, likePost }                                                        = this.props;
+		const { post, likePost, navigation }                                                        = this.props;
 		const { image, user, text, likes = [], id, timestamp } = post;
 		const currentUsername                                                         = Authentication.currentUser.displayName;
 		if (!currentUsername) return null;
-
 		return <View>
 			<Grid>
 				<Row>
@@ -27,7 +25,7 @@ export default class Post extends React.PureComponent {
 					<Icon name="ellipsis-v"/>
 				</Row>
 			</Grid>
-			<TouchableWithoutFeedback onPress={() => this.setState({visible: true})}>
+			<TouchableWithoutFeedback onPress={() => navigation ? navigation.navigate("Story", { docId: id}) : null}>
 				<Picture source={{uri: image}}/>
 			</TouchableWithoutFeedback>
 			<Actions>

@@ -16,6 +16,7 @@ import SelectAvatarScreen from "../screens/SelectAvatarScreen";
 import NewAvatarScreen from "../screens/NewAvatarScreen";
 import SignScreen from "../screens/SignScreen";
 import {isAuth, signOut} from "../services/authentication";
+import StoryScreen from "../screens/StoryScreen";
 
 const Navigator = createBottomTabNavigator(
 	{
@@ -54,6 +55,7 @@ const StackNavigator = createStackNavigator(
 		NewStory: NewStoryScreen,
 		SelectAvatar: SelectAvatarScreen,
 		NewAvatar: NewAvatarScreen,
+		Story: StoryScreen,
 	},
 	{
 		cardStyle: {backgroundColor: "white"},
