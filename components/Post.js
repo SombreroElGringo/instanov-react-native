@@ -1,21 +1,23 @@
 import moment from "moment";
 import "moment/locale/fr";
 import React from "react";
-import {Image, Text, TouchableOpacity, TouchableWithoutFeedback, View, Share} from "react-native";
+import {Image, KeyboardAvoidingView, Share, Text, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styled from "styled-components";
 import {Authentication} from "../helpers/firebase";
 import {connected} from "../helpers/redux";
 import {getWidth} from "../helpers/userDeviceInfo";
+import Comments from "./Comments";
 
 @connected
 export default class Post extends React.PureComponent {
 	render() {
-		const { post, likePost, navigation }                                                        = this.props;
-		const { image, user, text, likes = [], id, timestamp } = post;
-		const currentUsername                                                         = Authentication.currentUser.displayName;
+		const {post, likePost, navigation, sendComment}                = this.props;
+		const {image, user, text, likes = [], id, timestamp, comments} = post;
+		const currentUsername                                          = Authentication.currentUser.displayName;
 		if (!currentUsername) return null;
-		return <View>
+
+		return <KeyboardAvoidingView behavior="position">
 			<Grid>
 				<Row>
 					<Avatar source={{uri: user.avatarUrl || image}}/>
@@ -25,7 +27,7 @@ export default class Post extends React.PureComponent {
 					<Icon name="ellipsis-v"/>
 				</Row>
 			</Grid>
-			<TouchableWithoutFeedback onPress={() => navigation ? navigation.navigate("Story", { docId: id}) : null}>
+			<TouchableWithoutFeedback onPress={() => navigation ? navigation.navigate("Story", {docId: id}) : null}>
 				<Picture source={{uri: image}}/>
 			</TouchableWithoutFeedback>
 			<Actions>
@@ -37,8 +39,9 @@ export default class Post extends React.PureComponent {
 					<TouchableOpacity onPress={() => Share.share({
 						message: `Hey ! Check that awesome post ! ${image}`,
 						title: text,
-						url: image
-					})}>
+						url: image,
+					})}
+					>
 						<Icon name="send-o"/>
 					</TouchableOpacity>
 				</Row>
@@ -53,8 +56,9 @@ export default class Post extends React.PureComponent {
 					<Text>{text}</Text>
 				</Text>
 			</Description>
+			<Comments comments={comments} postId={id} sendComment={sendComment}/>
 			<Date>{moment().to(timestamp)}</Date>
-		</View>;
+		</KeyboardAvoidingView>;
 	}
 }
 

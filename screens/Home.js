@@ -13,13 +13,11 @@ export default class Home extends Component {
 	render() {
 		const {loading, fetchPosts, posts} = this.props;
 		LayoutAnimation.easeInEaseOut();
-		return (
-			<FlatList
-				keyExtractor={e => e.id}
-				renderItem={({item}) => <Post post={item} navigation={this.props.navigation}/>}
-				data={posts}
-				refreshControl={<RefreshControl refreshing={loading} onRefresh={fetchPosts}/>}
-			/>
-		);
+		return <FlatList
+			keyExtractor={e => e.id}
+			renderItem={({item}) => <Post post={item} navigation={this.props.navigation}/>}
+			data={posts}
+			refreshControl={<RefreshControl refreshing={loading} onRefresh={fetchPosts}/>}
+		/>;
 	}
 }

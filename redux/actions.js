@@ -1,6 +1,15 @@
-import {Firestore} from "../helpers/firebase";
+import {COLLECTION_STORIES} from "../constants/Environment";
+import {Authentication, Firestore} from "../helpers/firebase";
 import {getCurrentUserDisplayName} from "../services/authentication";
-import {FETCH_STORIES, FETCH_STORIES_FAIL, FETCH_STORIES_SUCCESS, LIKE_POST} from "./constants";
+import {
+	FETCH_STORIES,
+	FETCH_STORIES_FAIL,
+	FETCH_STORIES_SUCCESS,
+	LIKE_POST,
+	SEND_COMMENT,
+	SEND_COMMENT_FAIL,
+	SEND_COMMENT_SUCCESS,
+} from "./constants";
 
 export const fetchPosts = () => async (dispatch) => {
 	try {
@@ -40,4 +49,26 @@ export const likePost = (id) => async (dispatch) => {
 		console.log(error.message);
 	}
 
+};
+
+export const sendComment = (id, message) => async dispatch => {
+	console.log({id, message});
+	if (!id || !message) return false;
+	dispatch({type: SEND_COMMENT});
+	try {
+		const {displayName, photoURL} = Authentication.currentUser;
+
+		const comment                 = {username: displayName, comment: message, timestamp: Date.now(), avatar: photoURL};
+		const ref                     = Firestore.collection(COLLECTION_STORIES).doc(id);
+		const post                    = await ref.get();
+		const comments                = post.get("comments") || [];
+		comments.push(comment);
+		ref.update({
+			comments,
+		});
+		dispatch({type: SEND_COMMENT_SUCCESS});
+	} catch (error) {
+		console.log(error.message);
+		dispatch({type: SEND_COMMENT_FAIL, error});
+	}
 };
