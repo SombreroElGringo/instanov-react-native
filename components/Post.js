@@ -20,7 +20,7 @@ export default class Post extends React.PureComponent {
 		return <KeyboardAvoidingView behavior="position">
 			<Grid>
 				<Row>
-					<Avatar source={{uri: user.avatarUrl || image}}/>
+						<Avatar source={{uri: user.avatarUrl || image}}/>
 					<Name>{user.username}</Name>
 				</Row>
 				<Row>
@@ -35,12 +35,15 @@ export default class Post extends React.PureComponent {
 					<TouchableOpacity onPress={() => likePost(id)}>
 						<Icon name={likes.includes(currentUsername) ? "heart" : "heart-o"}/>
 					</TouchableOpacity>
-					<Icon name="comment-o"/>
-					<TouchableOpacity onPress={() => Share.share({
-						message: `Hey ! Check that awesome post ! ${image}`,
-						title: text,
-						url: image,
-					})}
+					<TouchableOpacity onPress={this.onPress}>
+						<Icon name="comment-o"/>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => Share.share({
+							message: `Hey ! Check that awesome post ! ${image}`,
+							title: text,
+							url: image,
+						})}
 					>
 						<Icon name="send-o"/>
 					</TouchableOpacity>
@@ -56,14 +59,21 @@ export default class Post extends React.PureComponent {
 					<Text>{text}</Text>
 				</Text>
 			</Description>
-			<Comments comments={comments}
-			          postId={id}
-			          sendComment={sendComment}
-			          onPress={() => navigation ? navigation.push("Comments", {comments}) : null}
+			<Comments
+				comments={comments}
+				postId={id}
+				sendComment={sendComment}
+				onPress={this.onPress}
 			/>
 			<Date>{moment().to(timestamp)}</Date>
 		</KeyboardAvoidingView>;
 	}
+
+	onPress = () => this.props.navigation ? this.props.navigation.push("Comments", {
+		comments: this.props.post.comments,
+		sendComment: this.props.sendComment,
+		postId: this.props.post.id,
+	}) : null;
 }
 
 const Actions     = styled(View)` flex-direction: row; justify-content: space-between; align-items: center;`;
